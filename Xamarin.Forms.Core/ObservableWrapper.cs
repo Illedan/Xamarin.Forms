@@ -40,11 +40,15 @@ namespace Xamarin.Forms
 			if (IsReadOnly)
 				throw new NotSupportedException("The collection is read-only.");
 
+			_list.CollectionChanged -= ListOnCollectionChanged;
 			foreach (TRestrict item in _list.OfType<TRestrict>().ToArray())
 			{
 				_list.Remove(item);
 				item.Owned = false;
 			}
+
+			_list.CollectionChanged += ListOnCollectionChanged;
+			ListOnCollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
 		}
 
 		public bool Contains(TRestrict item)
