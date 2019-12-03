@@ -132,8 +132,7 @@ namespace Xamarin.Forms.Platform.Android
 
 			if (ItemsLayout is LinearItemsLayout listItemsLayout && listItemsLayout.Orientation == ItemsLayoutOrientation.Horizontal)
 			{
-				var numberOfVisibleItems = Carousel.NumberOfSideItems * 2 + 1;
-				itemWidth = (int)(Width - Carousel.PeekAreaInsets.Left - Carousel.PeekAreaInsets.Right - Context?.ToPixels(listItemsLayout.ItemSpacing)) / numberOfVisibleItems;
+				itemWidth = (int)(Width - Carousel.PeekAreaInsets.Left - Carousel.PeekAreaInsets.Right - Context?.ToPixels(listItemsLayout.ItemSpacing));
 			}
 
 			return itemWidth;
@@ -145,8 +144,7 @@ namespace Xamarin.Forms.Platform.Android
 
 			if (ItemsLayout is LinearItemsLayout listItemsLayout && listItemsLayout.Orientation == ItemsLayoutOrientation.Vertical)
 			{
-				var numberOfVisibleItems = Carousel.NumberOfSideItems * 2 + 1;
-				itemHeight = (int)(Height - Carousel.PeekAreaInsets.Top - Carousel.PeekAreaInsets.Bottom - Context?.ToPixels(listItemsLayout.ItemSpacing)) / numberOfVisibleItems;
+				itemHeight = (int)(Height - Carousel.PeekAreaInsets.Top - Carousel.PeekAreaInsets.Bottom - Context?.ToPixels(listItemsLayout.ItemSpacing));
 			}
 
 			return itemHeight;
@@ -167,7 +165,7 @@ namespace Xamarin.Forms.Platform.Android
 			UpdateAdapter();
 		}
 
-		void UpdateAdapter()
+		protected override void UpdateAdapter()
 		{
 			// By default the CollectionViewAdapter creates the items at whatever size the template calls for
 			// But for the Carousel, we want it to create the items to fit the width/height of the viewport
